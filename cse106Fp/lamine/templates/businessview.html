@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/business.css') }}">
+   
+</head>
+
+<body>
+<tabble>
+      <tr><td colspan="2">
+         <table  class="title">
+            <tr>
+               <td colspan="2" align="center"><b><font size="6" >Business View</font></b></td>
+            </tr>   
+            <tr>
+                  <td ><font size="5">@ {{ name }}! &nbsp <a href="{{url_for('funct' , User_Id = User_Id)}}"> Edit/create/delite Post </a> </font></td>
+                  
+                  <td  align="right"><a href='{{url_for('login')}}'><button type="submit">logout</button></a></td>
+            </tr>
+               
+         </table>
+         </td>
+      </tr>
+
+      <tr>
+         <td colspan="2">
+             <br></br>
+             <br></br>
+         </td>
+
+     </tr>
+
+      
+      <tr><td colspan="2">
+                   <div class="post">
+                     <table width=100%>
+                     {%for s in bpost%}
+            
+                     <tr> 
+                        <td class="a"> {{name}}  </td>  
+                        <td class="b">{{s.created_date}} </td>
+                     </tr>
+                     <tr>
+                         <td colspan="2">{{s.title}}  </td>
+                     </tr>
+                     <tr> 
+                        <td colspan="2">{{s.description}}</td>
+
+                     </tr>
+                     <tr> 
+                        <td  class="c"colspan="2"> <img src="{{ url_for('static', filename='like2.png') }}" width="30" height="30"> {{s.likes}}      <img src="{{ url_for('static', filename='unlike.png') }}" width="30" height="30">{{s.dislikes}} </td>
+                        <br>
+                     </tr>
+
+                     
+
+                     <tr>
+                        <td colspan="2">
+                        
+                        {% for k in creply %}
+                        <table class= "rep" >
+                        <tr> <td class="a"> @{{k.Users.fullname}}  </td>  
+                              <td class="b">{{k.created_date}} </td>
+                        </tr>
+                        
+                        <tr> 
+                           <td class="desc"colspan="2">{{k.message}}</td>
+                        </tr>
+                        
+                        <tr> 
+                           <td class="c" colspan="2"> <img src="{{ url_for('static', filename='like2.png') }}" width="30" height="30"> {{k.likes}}      <img src="{{ url_for('static', filename='unlike.png') }}" width="30" height="30">{{k.dislikes}} </td>
+                        </tr>
+                        
+                        </table>
+                        {% endfor %}
+                        
+                        </td>
+                     </tr>
+
+
+                     
+                     {% endfor %}
+                     </table>
+                   </div>
+            </td>
+      </tr>
+
+         
+      
+
+ 
+   </table>
+
+     
+
+     
+
+
+
+
+</body>
+</html>
