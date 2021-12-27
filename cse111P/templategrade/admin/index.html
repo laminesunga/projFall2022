@@ -1,0 +1,29 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/index.css') }}">
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+{% extends 'admin/master.html' %}
+{% block body %}
+
+    <h1>This is an admin page. Click the navigation to explore</h1>
+    <div class="menu">
+    
+
+    <a href = "{{url_for('newstudent')}}"> <buton>Create new student</buton></a>
+    <a href = "{{url_for('newinstruc')}}"> <buton>create new Instructor</buton></a>
+    <a href = "{{url_for('newclasse')}}"> <buton>create new Classe</buton></a>
+    <a href = ""> <buton>Enroll/drop Student</buton></a>
+    <a href = ""> <buton>Do more</buton></a>
+
+        
+        
+       
+    
+    </div>
+{% endblock %}
+
+

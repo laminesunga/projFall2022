@@ -1,0 +1,13 @@
+<form action="{{ url_for('editgrade', username=username,c_name=c_name,s_name=s_name)}}" method = 'POST'>
+    <div class="form-group">
+        <label for="name">student:</label>
+        <input type="text" maxlength="100" name ="sname" value ={{ s_name }}>
+ 
+        <label for="grade">grade:</label>
+        <input maxlength="100" name ="grade" placeholder="grade of the student">
+        <button type="submit"> SAVE</button>
+        <a href='{{url_for('login')}}'>
+            <button>Cancel</button>
+        </a>
+    </div>
+</form>

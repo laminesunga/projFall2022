@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/newstudent.css') }}">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+<h2> View/Create/edit/student         <a href='{{url_for('login')}}'><button align="right" type="submit">logout</button></a> </h2>
+
+   
+  
+   
+   <div class="row">
+      <div class="column" style="background-color:#aaa;">
+        <h2>Register a student</h2>
+        <p>Some text..</p>
+        <form action = "{{url_for('newstudent')}}"  method = "POST">
+         <h2>  Create New student </h2> 
+         <label for="name">Student Name: </label>
+         <input type="text" maxlength="100" name="name" />
+         <br><br>
+         <label for="usern">username: </label>
+         <input maxlength="100" name="usern" />
+         <br><br>
+         <label for="phone">phone number: </label>
+         <input maxlength="100" name="phone" />
+         <br><br>
+         <label for="bithdate">birth date: </label>
+         <input maxlength="100" name="birthdate" />
+         <br><br>
+         <input type="hidden" name="status" value="add">
+         <button type="submit" >Add Record </button>
+         
+         
+         </form>
+
+         <br><br>
+         <table>
+            <tr> 
+               <th>Student name</th>
+               <th>User Id</th>
+ 
+            </tr>
+            {%for s in allst%}
+            <tr>
+               {%for k in s%}
+               <td>{{k}}</td>
+               
+               {%endfor%}
+            </tr>
+            {%endfor%}
+            
+         </table>
+      </div>
+
+
+      <div class="column" style="background-color:#bbb;">
+        <h2>View all student</h2>
+        
+        <form action = "{{url_for('newstudent')}}"  method = "POST">
+        <label for="sid">User Id: </label>
+        <input maxlength="100" name="sid" />
+        <input type="hidden" name="status" value="info">
+        <br><br>
+        <button type="submit" >view student Info </button>
+        <br><br>
+       
+        
+        <table>
+           <tr> 
+              <th>class name</th>
+                <th> Description </th>
+                <th>Grade</th>
+                <th> days</th>
+                <th> instructor name</th>
+
+           </tr>
+           
+           {%for s in info%}
+           <tr>
+              {%for k in s%}
+              <td>{{k}}</td>
+              
+              {%endfor%}
+           </tr>
+           {%endfor%}
+
+         
+
+
+           
+        </table>
+        <h3> Your AVerage Grade so Far is
+         {% for k in gpa %}
+          {{k[0]}} / 100</h3>
+          {%endfor%}
+
+        </form>
+      
+      </div>
+
+   </div>
+   
+
+</body>
+</html>

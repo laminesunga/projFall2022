@@ -1,0 +1,33 @@
+<html>
+    
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/student.css') }}">
+</head>
+<body>
+   <h1>'Hello Dr. {{value[0]}} ' </h1>
+   <table border = 2 >
+    <tr> <td>class name </td><td>Instructor name</td><td>max capacity</td>
+    <td>curent Enrollment</td><td>start time</td><td>end time</td><td>View/Edit</td></tr>
+   {% for item in data %}
+   <tr>
+    {% for k in item%}
+   <td>{{ k }} </td> 
+    {% endfor %}
+   <td>  <a href="{{url_for('gradeview', username = username, c_name = item[0])}}"> View  </a></td>
+   </tr>
+   {% endfor %}
+   </table>
+
+
+   <!-- <button type="submit"> logout</button>
+   <a href="{{url_for('login')}}">
+       <button>Log out</button>
+   </a> -->
+
+
+
+ 
+</body>
+</html>
+
+

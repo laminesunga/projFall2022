@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/student.css') }}">
+</head>
+<script>
+    function submitForm(cid){
+        document.getElementById('cid').value = cid;
+        document.getElementById('div1').style.display = 'block';
+        document.getElementById("f1").submit();
+}
+</script>
+    
+<body>
+    <table>
+        <tr><td colspan="2">
+            <table>
+                <tr>
+                    <td><br><br><font size="4">Welcome {{ nm }}!</font></td>
+                    <td align="center"><b><font size="8" >ACME University</font></b></td>
+                    <td align="right"><a href='{{url_for('login')}}'><button type="submit">logout</button></a></td>
+                </tr>
+            </table>
+            </td>
+        </tr>
+        
+        <tr>
+            
+            <td align="center">
+                <button type="button" 
+                    onclick="document.getElementById('div2').style.display = 'none';
+                             document.getElementById('div1').style.display = 'block';"> Your Courses</button>
+                
+            </td>
+            <td align="center">
+                <button type="button" 
+                onclick="document.getElementById('div1').style.display = 'none';
+                         document.getElementById('div2').style.display = 'block';"> Add Courses</button>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2">
+                <br></br>
+                <br></br>
+            </td>
+
+        </tr>
+        <tr>
+            
+            <!-- Div to show Your Courses -->
+            <td colspan="2">
+                <div id="div1" style="display:none">
+                    <table width="100%">
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Teacher</th>
+                            <th>Days</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>My Grade</th>
+                            <th>Students Enrolled</th>
+                        </tr>
+                        
+                        {% for enrolled_class in enrollment %}
+                    
+                        <tr>
+                            <td>{{ enrolled_class.Classes.c_name }}</td>
+                            <td>{{ enrolled_class.Classes.Instructor.i_name }}</td>
+                            <td>{{ enrolled_class.Classes.c_days }}</td>
+                            <td>{{ enrolled_class.Classes.c_start_time }}</td>
+                            <td>{{ enrolled_class.Classes.c_end_time }}</td>
+                            <td>{{ enrolled_class.e_grade }}</td>
+                            <td>{{ enrolled_class.Classes.c_enrollNumber }}/{{enrolled_class.Classes.c_capacity}}</td>
+                            
+                        </tr>
+                        {% endfor %}
+                        
+                        <h3> Your AVerage Grade so Far is
+                        {% for k in gpa %}
+                         {{k[0]}} / 100</h3>
+                         {%endfor%}
+                    </table>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <!-- Div to show Add Courses -->
+                <div id="div2" style="display:none">
+                    <form action = "/student?User_Id={{uid}}" id="f1" method = "POST" onsubmit="return false;">
+                    <input type="hidden" id="cid" name="cid" >
+                    <table width="100%">
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Teacher</th>
+                            <th>Days</th>
+                            <th>Start Time </th>
+                            <th>End Time</th>
+                            <th>Students Enrolled</th>
+                            <th>ADD/Drop </th>
+                        </tr>
+                        {% for class in classes %}
+                        <tr>
+                            <td>{{class.c_name }}</td>
+                            <td>{{class.Instructor.i_name}}</td>
+                            <td>{{class.c_days}}</td>
+                            <td>{{class.c_start_time }}</td>
+                            <td>{{class.c_end_time }}</td>
+                            <td>{{class.c_enrollNumber}}/{{class.c_capacity}}</td>
+
+                            {% set ftotal= {'count': 0} %}                           
+                            {% for enrolled_class in enrollment %}  
+                                {% if (( class.c_name ==  enrolled_class.Classes.c_name) and 
+                                      ( class.c_enrollNumber != class.c_capacity) ) %}
+                                     
+                                    {% if ftotal.update({'count': ftotal.count + 1}) %}{% endif %} 
+                                    
+                                    <td><img src="{{ url_for('static', filename='minus.png') }}" width="40" height="40" onclick="submitForm({{ class.id}});"></td>
+                                    
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if ( class.c_enrollNumber == class.c_capacity) %}
+                            <td><img src="{{ url_for('static', filename='minus.png') }}" width="40" height="40" >></td>
+                            {% else %}
+                                    {% if ftotal.count == 0 %}
+                                    <td><img src="{{ url_for('static', filename='plus.png') }}" width="40" height="40" onclick="submitForm({{ class.id}});"></td>
+                                    {% endif %}
+                            {% endif %}
+                        
+                        </form>
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </td>
+        </tr>
+
+    </table>
+</body>
+
+</html>

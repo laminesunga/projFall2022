@@ -1,0 +1,43 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/newstudent.css') }}">
+ </head>
+ <body>
+ <h2>Create student </h2>
+ <form action = "{{url_for('newclasse')}}"  method = "POST">
+    <div class="form-group" >
+    
+       
+       <label for="name">classe Name: </label>
+       <input type="text" maxlength="100" name="name" />
+       <br><br>
+       <label for="instid">instructor Id: </label>
+       <input maxlength="100" name="instid" />
+       <br><br>
+       <label for="departid">classe departement Id: </label>
+       <input maxlength="100" name="departid"/>
+       <br><br>
+       <label for="capa">classe capacity: </label>
+       <input maxlength="100" name="capa" />
+       <br><br>
+       <label for="enrol">curent enroll: </label>
+       <input maxlength="100" name="enrol" />
+       <br><br>
+       <label for="desc">description: </label>
+       <input maxlength="100" name="desc" />
+       <br><br>
+       <label for="days">Classe Days: </label>
+       <input maxlength="100" name="days" />
+       <br><br>
+       <label for="start">satrt time: </label>
+       <input maxlength="100" name="start" />
+       <br><br>
+       <label for="end">end time: </label>
+       <input maxlength="100" name="end" />
+       <br><br>
+       
+ 
+       <button type="submit">Add Record </button>
+    
+    </div>
+</form>
+</body>

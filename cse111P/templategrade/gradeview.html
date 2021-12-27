@@ -1,0 +1,100 @@
+<html>
+    
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/newstudent.css') }}">
+</head>
+<body>
+
+    <table>
+        <tr>
+            
+            <td align="center"><b><font size="5" >All student</font></b></td>
+            <td align="right"><a href='{{url_for('login')}}'><button type="submit">logout</button></a></td>
+        </tr>
+    </table>
+   
+
+  
+
+
+
+   <div class="row">
+    <div class="column" style="background-color:#aaa;">
+      <h2>Student Grade</h2>
+ 
+    <table>
+
+        <tr>
+            <th>min</th>
+            <th>average</th>
+            <th>maximun</th>
+        </tr>
+        {%for s in ave%}
+     
+        
+        <tr>
+           
+           {%for k in s%}
+           <td>{{k}}</td>
+           
+           {%endfor%}
+          
+        </tr>
+        {%endfor%}
+        
+     </table>
+
+     <br><br>
+
+          
+   <table border = 2 >
+   
+    {% for item in data1 %}
+    
+    <tr>
+    {% for k in item %}
+    <td>{{ k }} </td> 
+    {% endfor %}
+    <td>  <a href="{{url_for('editgrade', username = username, c_name = c_name, s_name = item[0])}}"> Edit </a></td>
+    </tr>
+    {% endfor %}
+    </table>
+      
+ 
+  
+       
+   
+    </div>
+ 
+ 
+    <div class="column" style="background-color:#bbb;">
+      <h2>Instructor function </h2>
+     
+
+       <form action = "{{url_for('gradeview',username = username, c_name=c_name)}}"  method = "POST">
+        <label for="grd">Grade to add/remove: </label>
+        <input maxlength="100" name="grd" placeholder="Grade"/>
+        <br><br>
+        
+        <button type="submit" >Add/Rem </button>
+        <br><br>
+        
+  
+        </form>
+
+
+
+    </div>
+
+ </div>
+      
+
+
+ 
+   
+
+
+
+ 
+</body>
+</html>

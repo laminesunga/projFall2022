@@ -1,0 +1,101 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/newstudent.css') }}">
+ </head>
+ <body>
+ <h1> Instructor   <a href='{{url_for('login')}}'><button align="right" type="submit">logout</button></a></h1>
+ 
+
+
+
+
+ 
+ <div class="row">
+   <div class="column" style="background-color:#aaa;">
+     <h2>Register a Instructor</h2>
+     <form action = "{{url_for('newinstruc')}}"  method = "POST">
+      <div class="form-group" >
+      
+         
+         <label for="name">Instructor Name: </label>
+         <input type="text" maxlength="100" name="name" placeholder="first_name last_name"/>
+         <br><br>
+         <label for="usern">username: </label>
+         <input maxlength="100" name="usern" placeholder="username"/>
+         <br><br>
+         
+         <input type="hidden" name="status" value="add">
+         <button type="submit">Add Record </button>
+      
+      </div>
+   </form>
+
+      
+     
+      <br><br>
+      <table>
+         <tr> 
+            <th>Instructor name</th>
+            <th>User Id</th>
+ 
+         </tr>
+         {%for s in allinst%}
+         <tr>
+            
+            {%for k in s%}
+            <td>{{k}}</td>
+            
+            {%endfor%}
+           
+         </tr>
+         {%endfor%}
+         
+      </table>
+ 
+      
+  
+   </div>
+
+
+   <div class="column" style="background-color:#bbb;">
+     <h2>View instructor record </h2>
+     <form action = "{{url_for('newinstruc')}}"  method = "POST">
+      <label for="sid">Insctructor Id: </label>
+      <input maxlength="100" name="sid" placeholder="username"/>
+      <br><br>
+      <input type="hidden" name="status" value="info">
+      <button type="submit" >One Instructor </button>
+      <br><br>
+      
+
+      <table>
+
+         
+         {%for s in onei%}
+         
+         <tr>
+            
+            {%for k in s%}
+            <td>{{k}}</td>
+            
+            {%endfor%}
+           
+         </tr>
+         {%endfor%}
+         
+      </table>
+
+
+
+
+
+      </form>
+     
+   
+   </div>
+   
+</div>
+
+
+</body>
+</html>
+</body>
